@@ -1,0 +1,23 @@
+{
+  "name": "Python 3.13 Development",
+  "dockerFile": "./Dockerfile",  // Path to the Dockerfile
+  "workspaceFolder": "/workspace", // The folder inside the container where your code will be mounted
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "remoteUser": "dev",            // Optional: Use root as the user in the container
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "donjayamanne.python-extension-pack",
+        "esbenp.prettier-vscode",
+        "ms-python.black-formatter",
+        "vscode.git",
+        "mhutchie.git-graph",
+        "bierner.markdown-mermaid",
+      ]
+    }
+  }
+}
