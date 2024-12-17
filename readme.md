@@ -1,5 +1,3 @@
-# Project Name
-
 This is a Python project with a development environment configured inside a Docker container. The project leverages `asyncio` for asynchronous programming and `invoke` for task management. It also includes a custom Docker environment with Zsh and Powerlevel10k theme for an enhanced development experience.
 
 ---
