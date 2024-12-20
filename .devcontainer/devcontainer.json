@@ -1,5 +1,5 @@
 {
-  "name": "Python 3.13 Development",
+  "name": "Snipe Pump Fun Tokens",
   "dockerFile": "./Dockerfile",  // Path to the Dockerfile
   "workspaceFolder": "/workspace", // The folder inside the container where your code will be mounted
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
