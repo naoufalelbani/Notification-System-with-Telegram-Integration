@@ -1,2 +1,1 @@
-from .notifier import *
-from .telegram_notifier import *
+from .telegram import *
