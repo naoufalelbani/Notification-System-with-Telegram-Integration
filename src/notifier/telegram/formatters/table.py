@@ -8,4 +8,5 @@ class TableFormatter(Formatter):
         self.tablefmt = tablefmt
 
     def format(self, data):
-        return tabulate(data, headers=self.headers, tablefmt=self.tablefmt)
+        formatted_message = tabulate(data, headers=self.headers, tablefmt=self.tablefmt)
+        return f"```\n{formatted_message}\n```"

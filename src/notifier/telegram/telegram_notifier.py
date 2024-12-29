@@ -1,6 +1,5 @@
 from core.formatter import Formatter
 from core.notifier import Observer
-from abc import abstractmethod
 from utils import get_logger
 from config import TELEGRAM_BOT_TOKEN,TELEGRAM_CHAT_ID
 import requests # type: ignore
@@ -18,15 +17,12 @@ class TelegramNotifier(Observer):
   def update(self, message):
     
     if self.formatter != None:
-      """Format the data and send it to Telegram."""
-      formatted_message = self.formatter.format(message)
-    else:
-      formatted_message = message
-    
+      message = self.formatter.format(message)
+
     payload = {
       "chat_id": TELEGRAM_CHAT_ID,
-      "text": f"```\n{formatted_message}\n```",
-      "parse_mode": "MarkdownV2"
+      "text": message,
+      "parse_mode": "Markdown"
     }
     
     response = requests.post(self.url, json=payload)
