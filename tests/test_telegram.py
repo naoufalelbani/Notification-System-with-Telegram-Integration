@@ -3,7 +3,6 @@ from unittest.mock import patch, MagicMock
 
 from notifier.telegram.formatters.alert import AlertFormatter
 from notifier.telegram.formatters.table import TableFormatter
-from core.notifier import Notifier
 from notifier.telegram import TelegramNotifier
 
 @pytest.fixture
@@ -60,11 +59,10 @@ def test_send_table_message_to_telegram(table_formatter):
   ]
   
   telegram_test = TelegramNotifier(AlertFormatter())
-  telegram_test.update({"title": "Bot (test)", "message":"This is from test"})
+  telegram_test.update({"title": "Bot (test)", "message":"This message is generated from a test case"})
   
   telegram = TelegramNotifier(formatter=table_formatter)
   response = telegram.update(data)
-  
   
   # Assert
   assert response["ok"] is True
