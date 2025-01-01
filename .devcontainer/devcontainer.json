@@ -1,5 +1,5 @@
 {
-  "name": "Snipe Pump Fun Tokens",
+  "name": "telegram_notification_service",
   "dockerFile": "./Dockerfile",  // Path to the Dockerfile
   "workspaceFolder": "/workspace", // The folder inside the container where your code will be mounted
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
