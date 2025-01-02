@@ -1,4 +1,4 @@
-from message import Message
+from messages.message import Message
 
 class TableMessage(Message):
     def __init__(self, title, headers, rows):

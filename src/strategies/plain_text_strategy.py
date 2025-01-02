@@ -1,14 +1,13 @@
 from strategies import FormattingStrategy
+from tabulate import tabulate
 
 class PlainTextStrategy(FormattingStrategy):
     def format(self, message_content):
         if 'title' in message_content:
             # Table formatting
             title = f"{message_content['title']}\n"
-            headers = " | ".join(message_content['headers']) + "\n"
-            separator = "-" * len(headers) + "\n"
-            rows = "\n".join([" | ".join(row) for row in message_content['rows']])
-            return title + headers + separator + rows
+            table = tabulate(message_content['rows'], headers=message_content['headers'], tablefmt="rounded_outline")
+            return title + table
         elif 'items' in message_content:
             # List formatting
             return "\n".join([f"- {item}" for item in message_content['items']])

@@ -1,13 +1,14 @@
+# Messages package initialization
+from .table import TableMessage,TableMessageBuilder
+from .alert import AlertMessage,AlertMessageBuilder
+from .list import ListMessage,ListMessageBuilder
+from .composite import CompositeMessage,CompositeMessageBuilder
 from .message import Message
-from .table import TableMessage
-from .alert import AlertMessage
-from .list import ListMessage
-from .composite import CompositeMessage
 
 __all__ = [
-    'Message',
-    'TableMessage',
-    'AlertMessage',
-    'ListMessage',
-    'CompositeMessage'
+    'table',
+    'alert',
+    'list',
+    'composite',
+    'Message'
 ]

@@ -13,9 +13,10 @@ class TelegramBot:
         url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
         payload = {
             "chat_id": chat_id,
-            "text": message,
+            "text": str(message),  # Convert message to string
             "parse_mode": parse_mode
         }
+        print(f"Sending message: {payload['text']}")  # Debugging
         response = requests.post(url, json=payload)
         if response.status_code != 200:
             raise Exception(f"Failed to send message: {response.text}")

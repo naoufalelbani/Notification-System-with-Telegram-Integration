@@ -1,4 +1,5 @@
-from .composite_message import CompositeMessage
+from messages.composite import CompositeMessage
+from messages.message import Message
 
 class CompositeMessageBuilder:
     def __init__(self):

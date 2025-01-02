@@ -1,4 +1,4 @@
-from .alert_message import AlertMessage
+from messages.alert import AlertMessage
 
 class AlertMessageBuilder:
     def __init__(self):

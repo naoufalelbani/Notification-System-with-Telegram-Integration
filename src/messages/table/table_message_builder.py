@@ -1,4 +1,4 @@
-from .table_message import TableMessage
+from messages.table import TableMessage
 
 class TableMessageBuilder:
     def __init__(self):

@@ -1,4 +1,4 @@
-from .list_message import ListMessage
+from messages.list import ListMessage
 
 class ListMessageBuilder:
     def __init__(self):

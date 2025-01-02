@@ -1,4 +1,4 @@
-from message import Message
+from messages.message import Message
 
 class AlertMessage(Message):
     def __init__(self, message):
