@@ -29,8 +29,6 @@ class TelegramBot:
             Exception: If the message fails to send.
         """
         
-        print(f"Parse mode: {parse_mode}")
-        
         url = f"{self.base_url}/sendMessage"
         payload = {
             "chat_id": chat_id,

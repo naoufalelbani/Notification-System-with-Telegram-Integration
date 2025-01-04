@@ -5,24 +5,30 @@ from commands import NotificationCommand
 import logging
 
 class NotificationManager:
-    # Class-level default strategy
-    _default_strategy = None
+    """
+    Manages notifications and sends formatted messages to registered chat IDs.
+    Uses a default formatting strategy to format messages.
+    """
 
     def __init__(self):
         """
         Initialize the NotificationManager with an empty set of chat IDs.
         """
-        self.chats = set()
-        self.bot = TelegramBot(TELEGRAM_BOT_TOKEN)
-        self._setup_logging()
+        self.chats = set()  # Set of registered chat IDs
+        self.bot = TelegramBot(TELEGRAM_BOT_TOKEN)  # Telegram bot instance
+        self._default_strategy = None  # Default formatting strategy
+        self._setup_logging()  # Set up logging
 
     @classmethod
     def with_default_strategy(cls, strategy):
         """
-        Set the default strategy for all instances of NotificationManager.
+        Set the default formatting strategy for all instances of NotificationManager.
 
         Args:
-            strategy: The default formatting strategy (e.g., MarkdownV2Strategy).
+            strategy (Type[FormattingStrategy]): The default strategy to use for formatting.
+
+        Returns:
+            NotificationManager: The instance with the default strategy set.
         """
         cls._default_strategy = strategy
         logging.info(f"Default strategy set to {strategy.__name__}.")
@@ -59,9 +65,9 @@ class NotificationManager:
         Notify all registered chat IDs with the given message.
 
         Args:
-            message (str or Message): The message to send. If it's a Message object, it will be formatted using its strategy.
+            message (str or Message): The message to send. If it's a Message object, it will be formatted using the default strategy.
             parse_mode (str, optional): The parse mode for the message (e.g., 'MarkdownV2', 'HTML', 'plain').
-                                       If None, it will be inferred from the default strategy or the message's strategy.
+                                       If None, it will be inferred from the default strategy.
         """
         if not self.chats:
             logging.warning("No chats registered to notify.")
@@ -84,7 +90,9 @@ class NotificationManager:
                 logging.error(f"Failed to send message to chat {chat_id}: {e}")
 
     def _setup_logging(self):
-        """Set up logging configuration."""
+        """
+        Set up logging configuration.
+        """
         logging.basicConfig(
             level=logging.INFO,
             format="%(asctime)s - %(levelname)s - %(message)s"
@@ -129,7 +137,7 @@ class NotificationManager:
         elif strategy_name == "HTMLStrategy":
             return "HTML"
         elif strategy_name == "PlainTextStrategy":
-            return "plain"
+            return "Markdown"
         else:
             return "Markdown"
 
@@ -144,10 +152,10 @@ class NotificationManager:
             str: The formatted message.
         """
         if hasattr(message, 'get_formatted_message'):
-            # If the message is a CompositeMessage, pass the strategy class
+            # If the message is a CompositeMessage, it handles its own strategy
             if isinstance(message, CompositeMessage):
-                return message.get_formatted_message(self._default_strategy)
-            # For other Message objects, use the default strategy instance
+                return message.get_formatted_message()
+            # For other Message objects, use the default strategy
             strategy = self._default_strategy() if self._default_strategy else None
             if strategy:
                 return message.get_formatted_message(strategy)

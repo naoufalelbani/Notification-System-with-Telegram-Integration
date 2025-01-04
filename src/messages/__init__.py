@@ -3,6 +3,8 @@ from .table import TableMessage,TableMessageBuilder
 from .alert import AlertMessage,AlertMessageBuilder
 from .list import ListMessage,ListMessageBuilder
 from .composite import CompositeMessage,CompositeMessageBuilder
+from .hyperlink import HyperlinkMessage,HyperlinkMessageBuilder
+from .text import TextMessage,TextMessageBuilder
 from .message import Message
 
 __all__ = [
@@ -10,5 +12,7 @@ __all__ = [
     'alert',
     'list',
     'composite',
-    'Message'
+    'Message',
+    'hyperlink',
+    'text'
 ]
