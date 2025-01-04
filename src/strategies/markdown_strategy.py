@@ -18,5 +18,12 @@ class MarkdownStrategy(FormattingStrategy):
             alert_label = f"**{message_content['alert_label']}**"  # Bold the alert_label
             message = message_content['message']
             return f"{icon} {alert_label} {message}"
+        elif 'text' in message_content:
+            # Quote formatting
+            text = message_content['text']
+            author = message_content.get('author')
+            if author:
+                return f'> "{text}"\n> — {author}'
+            return f'> "{text}"'
         else:
             raise ValueError("Unsupported message content for Markdown formatting")

@@ -18,5 +18,12 @@ class HTMLStrategy(FormattingStrategy):
             alert_label = f"<strong>{message_content['alert_label']}</strong>"
             message = message_content['message']
             return f"{icon} {alert_label} {message}"
+        elif 'text' in message_content:
+            # Quote formatting
+            text = message_content['text']
+            author = message_content.get('author')
+            if author:
+                return f'<blockquote>"{text}"</blockquote><p>— {author}</p>'
+            return f'<blockquote>"{text}"</blockquote>'
         else:
             raise ValueError("Unsupported message content for HTML formatting")
