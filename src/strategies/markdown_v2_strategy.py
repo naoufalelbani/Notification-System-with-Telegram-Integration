@@ -23,10 +23,12 @@ class MarkdownV2Strategy(FormattingStrategy):
             # List formatting for MarkdownV2
             items = [self.escape_markdown_v2(item) for item in message_content['items']]
             return "\n".join([f"• {item}" for item in items])
-        elif 'message' in message_content:
+        elif 'icon' in message_content and 'alert_label' in message_content and 'message' in message_content:
             # Alert formatting for MarkdownV2
+            icon = self.escape_markdown_v2(message_content['icon'])
+            alert_label = self.escape_markdown_v2(message_content['alert_label'])
             message = self.escape_markdown_v2(message_content['message'])
-            return f"⚠️ **Alert:** {message}"
+            return f"{icon} **{alert_label}** {message}"
         elif 'text' in message_content:
             # Quote formatting for MarkdownV2
             text = self.escape_markdown_v2(message_content['text'])
@@ -52,5 +54,6 @@ class MarkdownV2Strategy(FormattingStrategy):
         # List of reserved characters in MarkdownV2
         reserved_chars = "_*[]()~`>#+-=|{}.!"
         return "".join(f"\\{char}" if char in reserved_chars else char for char in text)
+
     def __str__(self):
         return "MarkdownV2"

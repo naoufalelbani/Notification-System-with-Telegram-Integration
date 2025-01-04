@@ -33,11 +33,11 @@ def main():
         .with_author("Franklin D. Roosevelt")
         .build()
     )
-    .with_default_strategy(MarkdownV2Strategy)
+    .with_default_strategy(MarkdownStrategy)
     .build()
     )
 
-    # print(composite_message)
+    print(composite_message)
 
     # # Send the message using MarkdownV2
     manager = NotificationManager()

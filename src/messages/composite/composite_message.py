@@ -16,16 +16,19 @@ class CompositeMessage(Message):
         """
         self.components = components
         self.separator = separator
-        self.default_strategy = default_strategy  # Store the default strategy
+        self.default_strategy = default_strategy
 
-    def get_formatted_message(self):
+    def get_formatted_message(self, strategy=None):
         """
-        Format the composite message using the default strategy.
+        Format the composite message using the provided strategy or the default strategy.
+
+        Args:
+            strategy (FormattingStrategy, optional): The strategy to use for formatting. If None, the default strategy is used.
 
         Returns:
             str: The formatted composite message.
         """
-        strategy_instance = self.default_strategy()  # Use the default strategy
+        strategy_instance = strategy() if strategy else self.default_strategy()
         formatted_components = []
         for comp in self.components:
             formatted_message = comp.get_formatted_message(strategy_instance)
