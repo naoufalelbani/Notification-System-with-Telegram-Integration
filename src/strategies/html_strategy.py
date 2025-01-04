@@ -1,4 +1,5 @@
-from strategies import FormattingStrategy
+# src/strategies/html_strategy.py
+from strategies.formatting_strategy import FormattingStrategy
 
 class HTMLStrategy(FormattingStrategy):
     def format(self, message_content):
@@ -11,8 +12,11 @@ class HTMLStrategy(FormattingStrategy):
         elif 'items' in message_content:
             # List formatting
             return "<ul>" + "".join([f"<li>{item}</li>" for item in message_content['items']]) + "</ul>"
-        elif 'message' in message_content:
+        elif 'icon' in message_content and 'alert_label' in message_content and 'message' in message_content:
             # Alert formatting
-            return f"<strong>⚠️ Alert:</strong> {message_content['message']}"
+            icon = message_content['icon']
+            alert_label = f"<strong>{message_content['alert_label']}</strong>"
+            message = message_content['message']
+            return f"{icon} {alert_label} {message}"
         else:
             raise ValueError("Unsupported message content for HTML formatting")

@@ -1,4 +1,5 @@
-from strategies import FormattingStrategy
+# src/strategies/markdown_v2_strategy.py
+from strategies.formatting_strategy import FormattingStrategy
 from tabulate import tabulate
 
 class MarkdownV2Strategy(FormattingStrategy):
@@ -14,15 +15,24 @@ class MarkdownV2Strategy(FormattingStrategy):
             # List formatting for MarkdownV2
             items = [self.escape_markdown_v2(item) for item in message_content['items']]
             return "\n".join([f"• {item}" for item in items])
-        elif 'message' in message_content:
+        elif 'icon' in message_content and 'alert_label' in message_content and 'message' in message_content:
             # Alert formatting for MarkdownV2
-            return f"⚠️ **Alert:** {self.escape_markdown_v2(message_content['message'])}"
+            icon = self.escape_markdown_v2(message_content['icon'])
+            alert_label = f"**{self.escape_markdown_v2(message_content['alert_label'])}**"  # Bold the alert_label
+            message = self.escape_markdown_v2(message_content['message'])
+            return f"{icon} *{alert_label}:* {message}"
         else:
             raise ValueError("Unsupported message content for MarkdownV2 formatting")
 
     def escape_markdown_v2(self, text):
         """
         Escape special characters for MarkdownV2.
+
+        Args:
+            text (str): The text to escape.
+
+        Returns:
+            str: The escaped text.
         """
         if not text:
             return text

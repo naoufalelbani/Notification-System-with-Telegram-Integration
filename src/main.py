@@ -1,5 +1,5 @@
 from messages.table import TableMessageBuilder
-from messages.alert import AlertMessageBuilder
+from messages.alert import AlertMessageBuilder,AlertIcon
 from messages.list import ListMessageBuilder
 from messages.composite import CompositeMessageBuilder
 from notification.notification_manager import NotificationManager
@@ -10,7 +10,9 @@ def main():
     builder = CompositeMessageBuilder()
     composite_message = builder.add_component(
         AlertMessageBuilder()
-        .with_message("Note: This is a sample report.")
+        .with_message("This is a sample report.")
+        .with_alert_label("Note")
+        .with_icon(AlertIcon.INFO)
         .build()
     ).add_component(
         TableMessageBuilder()
