@@ -5,7 +5,7 @@ class PlainTextStrategy(FormattingStrategy):
     def format(self, message_content):
         if 'title' in message_content:
             # Table formatting
-            title = f"{message_content['title']}\n"
+            title = f"{message_content['title']}\n" if message_content['title'] != "" else ""
             table = tabulate(message_content['rows'], headers=message_content['headers'], tablefmt="rounded_outline")
             return title + table
         elif 'items' in message_content:

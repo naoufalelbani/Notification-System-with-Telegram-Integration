@@ -1,5 +1,7 @@
+from telegram import TelegramBot
+
 class NotificationCommand:
-    def __init__(self, bot, chat_id, message, parse_mode='plain'):
+    def __init__(self, bot: TelegramBot, chat_id: str, message: str, parse_mode='Markdown'):
         self.bot = bot
         self.chat_id = chat_id
         self.message = message

@@ -19,6 +19,8 @@ class TableMessageBuilder:
         return self
 
     def build(self):
-        if not self.title or not self.headers or not self.rows:
-            raise ValueError("Title, headers, and rows are required for TableMessage")
+        if not self.headers or not self.rows:
+            raise ValueError("Headers and rows are required for TableMessage")
         return TableMessage(self.title, self.headers, self.rows)
+    
+    

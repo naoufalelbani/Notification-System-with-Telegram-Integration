@@ -1,8 +1,9 @@
+from typing import List
 from messages.message import Message
-from strategies import PlainTextStrategy
+from strategies import MarkdownStrategy, MarkdownV2Strategy
 
 class CompositeMessage(Message):
-    def __init__(self, components, separator="\n"):
+    def __init__(self, components: List[Message], separator="\n"):
         self.components = components
         self.separator = separator
 
@@ -10,11 +11,12 @@ class CompositeMessage(Message):
         formatted_components = []
         for comp in self.components:
             formatted_message = comp.get_formatted_message(strategy)
-            # Wrap only table messages in triple backticks
-            if hasattr(comp, 'rows'):  # Check if the component is a table
+            # Wrap only table messages in triple backticks for Markdown/MarkdownV2
+            if hasattr(comp, 'rows') and isinstance(strategy, (MarkdownStrategy, MarkdownV2Strategy)):
                 formatted_message = f"```\n{formatted_message}\n```"
             formatted_components.append(formatted_message)
         return self.separator.join(formatted_components)
 
     def __str__(self):
-        return self.get_formatted_message(PlainTextStrategy())  # Default to plain text
+        # Default to MarkdownV2 formatting when converting to string
+        return self.get_formatted_message(MarkdownV2Strategy())

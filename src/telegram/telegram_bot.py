@@ -9,7 +9,9 @@ class TelegramBot:
             cls._instance.bot_token = bot_token
         return cls._instance
 
-    def send_message(self, chat_id, message, parse_mode='plain'):
+    def send_message(self, chat_id, message, parse_mode='Markdown'):
+        if parse_mode not in ['Markdown', 'HTML', 'MarkdownV2']:
+            raise ValueError("Unsupported parse_mode. Use 'Markdown', 'HTML', or 'MarkdownV2'.")
         url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
         payload = {
             "chat_id": chat_id,
