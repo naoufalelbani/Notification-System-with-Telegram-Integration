@@ -18,7 +18,7 @@ class HTMLStrategy(FormattingStrategy):
             str: The formatted text message.
         """
         text = self.escape(message_content['text'])
-        return f"<p>{text}</p>"
+        return f"{text}"
     
     def _format_table(self, message_content):
         """
@@ -34,7 +34,7 @@ class HTMLStrategy(FormattingStrategy):
         headers = [self.escape(header) for header in message_content.get('headers', [])]
         rows = [[self.escape(str(cell)) for cell in row] for row in message_content['rows']]
         # Use tabulate to format the table as plain text
-        table = tabulate(rows, headers=headers, tablefmt="rounded_outline")
+        table = tabulate(rows, headers=headers, tablefmt="plain")
         # Wrap the table in <pre> tags for pre-formatted fixed-width text
         return f"{title}<pre>{table}</pre>"
     

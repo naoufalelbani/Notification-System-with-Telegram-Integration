@@ -44,9 +44,11 @@ def main():
         .with_text("This is a simple paragraph.")
         .build()
     )
-    .with_default_strategy(PlainTextStrategy)
+    .with_default_strategy(HTMLStrategy)
     .build()
     )
+    
+    print(composite_message)
 
     # # Send the message using MarkdownV2
     manager = NotificationManager()
