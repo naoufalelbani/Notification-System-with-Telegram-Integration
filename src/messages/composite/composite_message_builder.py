@@ -1,4 +1,3 @@
-# src/messages/composite/composite_message_builder.py
 from messages.composite.composite_message import CompositeMessage
 from messages.message import Message
 from strategies import FormattingStrategy

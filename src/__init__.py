@@ -1,4 +1,3 @@
-# Root package initialization
 from .messages import *
 from .strategies import *
 from .telegram import *

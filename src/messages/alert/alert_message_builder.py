@@ -1,4 +1,3 @@
-# src/messages/alert/alert_message_builder.py
 from messages.alert.alert_message import AlertMessage
 from messages.alert.alert_icon import AlertIcon  # Assuming AlertIcon is defined in alert_icon.py
 

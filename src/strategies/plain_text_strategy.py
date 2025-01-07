@@ -1,4 +1,3 @@
-# src/strategies/plain_text_strategy.py
 from strategies.formatting_strategy import FormattingStrategy
 from tabulate import tabulate
 

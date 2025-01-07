@@ -1,4 +1,3 @@
-# src/messages/quote/quote_message.py
 from messages.message import Message
 
 class QuoteMessage(Message):

@@ -1,4 +1,3 @@
-# Config package initialization
 from .settings import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 __all__ = [

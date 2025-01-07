@@ -1,4 +1,3 @@
-# Telegram package initialization
 from .telegram_bot import TelegramBot
 
 __all__ = [

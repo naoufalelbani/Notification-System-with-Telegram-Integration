@@ -1,4 +1,3 @@
-# src/messages/composite/composite_message.py
 from typing import List, Type
 from messages.message import Message
 from strategies import FormattingStrategy, MarkdownV2Strategy, MarkdownStrategy

@@ -1,4 +1,3 @@
-# src/messages/alert/alert_message.py
 from messages.message import Message
 
 class AlertMessage(Message):

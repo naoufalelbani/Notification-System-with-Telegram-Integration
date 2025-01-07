@@ -1,4 +1,3 @@
-# src/strategies/markdown_strategy.py
 from strategies.formatting_strategy import FormattingStrategy
 from tabulate import tabulate
 
