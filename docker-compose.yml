@@ -1,0 +1,23 @@
+services:
+  telegram-notifier:
+    build:
+      context: .  # Set the context to the parent directory
+      dockerfile: Dockerfile  # Path to the Dockerfile
+    container_name: telegram_notifier
+    working_dir: /app
+    volumes:
+      - ./src:/app  # Mount the ./src directory into the container
+    ports:
+      - "5555:5555"  # Map port 5555 on the host to port 5555 in the container
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}  # Use environment variables from .env
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    command: python main.py
+    networks:
+      - snipe_network
+
+# Define the custom network
+networks:
+  snipe_network:
+    name: snipe_network  # Optional: Give the network a name
+    driver: bridge     # Use the default bridge driver

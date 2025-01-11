@@ -7,7 +7,7 @@ def send_alert_message():
     """
     context = zmq.Context()
     socket = context.socket(zmq.PUSH)
-    socket.connect("tcp://localhost:5555")
+    socket.connect("tcp://app:5555")
 
     # Define the alert message
     alert_message = {

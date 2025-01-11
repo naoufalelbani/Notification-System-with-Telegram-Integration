@@ -1,5 +1,6 @@
 import zmq
 import logging
+import json
 from typing import Callable, Dict
 
 from config.settings import TELEGRAM_CHAT_ID
@@ -9,8 +10,9 @@ class Reactor:
     def __init__(self, zmq_address: str = "tcp://*:5555"):
         self.zmq_address = zmq_address
         self.context = zmq.Context()
-        self.socket = self.context.socket(zmq.PULL)
+        self.socket = self.context.socket(zmq.SUB)  # Change to SUB
         self.socket.bind(self.zmq_address)
+        self.socket.setsockopt_string(zmq.SUBSCRIBE, "telegram-notifier")  # Subscribe to specific topic
         self.handlers: Dict[str, Callable] = {}
         self.running = False
 
@@ -24,8 +26,10 @@ class Reactor:
         while self.running:
             try:
                 # Wait for incoming messages
-                message = self.socket.recv_json()
-                logging.info(f"Received message: {message}")
+                logging.info("Waiting for messages...")
+                topic, message = self.socket.recv_multipart()  # Receive topic and message
+                message = json.loads(message.decode('utf-8'))  # Decode the message
+                logging.info(f"Received message on topic '{topic.decode('utf-8')}': {message}")
 
                 # Dispatch the message to the appropriate handler
                 message_type = message.get("type", "default")
